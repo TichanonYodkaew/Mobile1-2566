@@ -1,0 +1,45 @@
+<ion-app>
+  <ion-split-pane contentId="main-content" class="edupala-menu">
+    <ion-menu contentId="main-content" type="overlay">
+      <ion-header>
+        <ion-toolbar>
+          <img src="https://media.tenor.com/K9-SqJMNjkEAAAAC/emotional-damage.gif" />
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-no-padding">
+        <ion-menu-toggle auto-hide="false" color>
+          <ion-toolbar>
+            <ion-grid>
+              <ion-row>
+                <ion-col size="4">
+                  <img src="https://gifdb.com/images/high/walter-white-breaking-bad-smiling-ut5dsev6odcci9ff.gif" />
+                </ion-col>
+                <ion-col size="8">
+                  <ion-text menuClose>
+                    Mr. White
+                  </ion-text>
+                  <div class="headerLogoutBtn">
+                    <ion-button href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" fill="clear" color="danger">
+                      Learn more <ion-icon slot="icon-only" name="help-circle-outline"></ion-icon>
+                    </ion-button>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-toolbar>
+
+          <ion-list class="ion-no-padding ion-no-margin">
+            <span *ngFor="let p of appPages; let i = index">
+              <ion-item color="danger" menuClose routerDirection="root" [routerLink]="[p.url]" routerLinkActive="selected">
+                <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+                <ion-label>{{ p.title }}</ion-label>
+              </ion-item>
+            </span>
+          </ion-list>
+        </ion-menu-toggle>
+
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

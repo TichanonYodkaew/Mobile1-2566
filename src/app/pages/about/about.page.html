@@ -1,0 +1,85 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="danger">
+    <ion-title>
+      About
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">About</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="https://media.gq.com/photos/573f81dac3ac8ed860728cb3/3:4/w_768,h_1024,c_limit/crying-jordan-original_1024.jpg">
+      </ion-avatar>
+      <h2> Crying Jordan</h2>
+      <h3> : </h3>
+      <p>The crying Jordan meme, like Michael Jordan himself, is arguably the greatest of all time.</p>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="https://i.guim.co.uk/img/media/ac3a7be3d4cdc0b7ed07b2eeb41c03df9e1887c6/1810_1937_3427_2056/master/3427.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=025145ce6c9529fef3075f8c0cb136d3">
+      </ion-avatar>
+      <h2>András Arató</h2>
+      <h3> : </h3>
+      <p>It looked as if I was smiling through the pain.</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="https://media.tenor.com/r1NzhfZ5AhsAAAAM/laughing-laugh.gif">
+      </ion-avatar>
+      <h2>El Risitas</h2>
+      <h3> : </h3>
+      <p>Due to his distinctive laugh, first came to fame on Spanish TV</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="https://im.indiatimes.in/media/content/2019/Sep/blinking_guy_meme_1569407297.gif">
+      </ion-avatar>
+      <h2>Drew Scanlon</h2>
+      <h3> : </h3>
+      <p>I'am reflected on viral fame and insisted "memes are real people. I am real".</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="https://gifdb.com/images/high/wee-bey-brice-shocked-black-guy-meme-u0881ygjnlz7o3o3.gif">
+      </ion-avatar>
+      <h2>Wee-Bey</h2>
+      <h3> : </h3>
+      <p>My reaction, also known as You Don't Say, is an reaction GIF</p>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let item of this.productlist">
+      <ion-item>
+        <ion-img src={{item.icon}} item-left></ion-img> &nbsp; 
+        <!-- <ion-icon src={{item.icon}}> </ion-icon> -->
+        <ion-label>{{item.productname}}</ion-label>
+      </ion-item>
+  
+      <ion-item-options>
+        <ion-item-option (click) = "showedit(item)">Edit</ion-item-option>
+        <ion-item-option color="danger">Delete</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  
+  </ion-list>
+  
+  
+  
+
+</ion-content>
