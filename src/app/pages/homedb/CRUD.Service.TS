@@ -1,9 +1,8 @@
 import { Injectable } from "@angular/core";
-import { collection, collectionData, Firestore } from "@angular/fire/firestore";
+import { addDoc, collection, collectionData, deleteDoc, doc, Firestore } from "@angular/fire/firestore";
 import { Observable, map } from "rxjs";
 
 export interface CustomerData {
-  id?: string;
   fullname: string;
   ispostpaid: boolean;
   price: number;
@@ -20,5 +19,21 @@ export class CrudService {
   loadAllData(): Observable<CustomerData[]> {
     const notesRef = collection(this.firestore, "StudentCollection");
     return collectionData(notesRef, { idField: "id" }) as Observable<CustomerData[]>;
+  }
+
+  createData(tmpObj:CustomerData){
+    const notesRef = collection(this.firestore, 'StudentCollection');
+    
+    return addDoc(notesRef,{
+      fullname: tmpObj.fullname,
+      ispostpaid: tmpObj.ispostpaid,
+      price: tmpObj.price,
+      telno: tmpObj.telno
+    });
+  }
+
+  deleteData(documentId: string) {
+    const noteRef = doc(this.firestore, 'StudentCollection', documentId);
+    return deleteDoc(noteRef);
   }
 }
