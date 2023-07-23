@@ -63,12 +63,14 @@ export class HomedbPage implements OnInit {
         {
           text: 'Create',
           handler: (data) => {
-            const CustomerData : CustomerData = {
+            const isPostPaid = data.inpispostpaid === 'on'; // เช็คว่าติ๊กหรือไม่ติ๊ก checkbox
+            const CustomerData: CustomerData = {
+              id: '',
               fullname: data.inpname,
-              ispostpaid: data.inpispostpaid,
-              price: data.inprice,
+              ispostpaid: isPostPaid, // กำหนดค่าให้กับ ispostpaid
+              price: parseInt(data.inprice),
               telno: data.intelno,
-            }
+            };
             this.dataService.createData(CustomerData);
           }//hadler
         }
@@ -77,7 +79,7 @@ export class HomedbPage implements OnInit {
     (await alert).present();
   }
 
-  async deleteConfirmation(documentId: string) {
+  async deleteConfirmation(tmpObj:CustomerData) {
     const alert = await this.alertCtrl.create({
       header: 'Delete',
       message: 'Are you sure you want to delete this data?',
@@ -90,7 +92,7 @@ export class HomedbPage implements OnInit {
         {
           text: 'Delete',
           handler: () => {
-            this.deleteData(documentId);
+            this.deleteData(tmpObj);
           },
         },
       ],
@@ -99,9 +101,9 @@ export class HomedbPage implements OnInit {
     await alert.present();
   }
 
-  deleteData(documentId: string): void {
+  deleteData(data_2:CustomerData): void {
     this.dataService
-      .deleteData(documentId)
+      .deleteData(data_2)
       .then(() => {
         console.log('Data deleted successfully.');
       })
@@ -109,4 +111,94 @@ export class HomedbPage implements OnInit {
         console.error('Error deleting data:', error);
       });
   }
+
+  async editConfirmation(tmpObj: CustomerData) {
+    const alert = await this.alertCtrl.create({
+      header: 'Edit',
+      message: 'Are you sure you want to edit this data?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+        },
+        {
+          text: 'Edit',
+          handler: () => {
+            this.update(tmpObj);
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async update(tmpObj: CustomerData) {
+    const alert = await this.alertCtrl.create({
+      header: 'Edit',
+      subHeader: 'Fill the form',
+      inputs: [
+        {
+          name: 'inpname',
+          type: 'text',
+          value: tmpObj.fullname, // ให้ค่าเริ่มต้นของชื่อเป็นค่าปัจจุบันใน Firebase
+          placeholder: 'Name',
+        },
+        {
+          name: 'inprice',
+          type: 'number',
+          value: tmpObj.price.toString(), // ให้ค่าเริ่มต้นของราคาเป็นค่าปัจจุบันใน Firebase
+          placeholder: 'Price',
+        },
+        {
+          name: 'intelno',
+          type: 'number',
+          value: tmpObj.telno, // ให้ค่าเริ่มต้นของเบอร์โทรศัพท์เป็นค่าปัจจุบันใน Firebase
+          placeholder: 'tel no.',
+        },
+        {
+          name: 'inpispostpaid',
+          type: 'checkbox',
+          checked: tmpObj.ispostpaid, // ให้ค่าเริ่มต้นของ checkbox เป็นค่าปัจจุบันใน Firebase
+          placeholder: 'Is post paid',
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          },
+        },
+        {
+          text: 'Save',
+          handler: (data) => {
+            const isPostPaid = data.inpispostpaid === 'on';
+            const editedData: CustomerData = {
+              id: tmpObj.id,
+              fullname: data.inpname,
+              ispostpaid: isPostPaid,
+              price: parseInt(data.inprice),
+              telno: data.intelno,
+            };
+
+            // ทำการอัปเดตข้อมูลใน Firebase
+            this.dataService
+              .updateData(editedData)
+              .then(() => {
+                console.log('Data updated successfully.');
+              })
+              .catch((error) => {
+                console.error('Error updating data:', error);
+              });
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
 }

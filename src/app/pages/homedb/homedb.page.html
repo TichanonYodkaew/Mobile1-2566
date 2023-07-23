@@ -22,8 +22,8 @@
       </ion-item>
   
       <ion-item-options>
-        <ion-item-option>Edit</ion-item-option>
-        <ion-item-option color="danger" (click)="deleteConfirmation(item.id)">Delete</ion-item-option>
+        <ion-item-option (click)="editConfirmation(item)" >Edit</ion-item-option>
+        <ion-item-option color="danger" (click)="deleteConfirmation(item)">Delete</ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
   
