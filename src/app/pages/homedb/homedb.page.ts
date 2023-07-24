@@ -63,11 +63,11 @@ export class HomedbPage implements OnInit {
         {
           text: 'Create',
           handler: (data) => {
-            const isPostPaid = data.inpispostpaid === 'on'; // เช็คว่าติ๊กหรือไม่ติ๊ก checkbox
+            const isPostPaid = data.inpispostpaid === 'on'; 
             const CustomerData: CustomerData = {
               id: '',
               fullname: data.inpname,
-              ispostpaid: isPostPaid, // กำหนดค่าให้กับ ispostpaid
+              ispostpaid: isPostPaid, 
               price: parseInt(data.inprice),
               telno: data.intelno,
             };
@@ -142,25 +142,25 @@ export class HomedbPage implements OnInit {
         {
           name: 'inpname',
           type: 'text',
-          value: tmpObj.fullname, // ให้ค่าเริ่มต้นของชื่อเป็นค่าปัจจุบันใน Firebase
+          value: tmpObj.fullname, 
           placeholder: 'Name',
         },
         {
           name: 'inprice',
           type: 'number',
-          value: tmpObj.price.toString(), // ให้ค่าเริ่มต้นของราคาเป็นค่าปัจจุบันใน Firebase
+          value: tmpObj.price.toString(),
           placeholder: 'Price',
         },
         {
           name: 'intelno',
           type: 'number',
-          value: tmpObj.telno, // ให้ค่าเริ่มต้นของเบอร์โทรศัพท์เป็นค่าปัจจุบันใน Firebase
+          value: tmpObj.telno,
           placeholder: 'tel no.',
         },
         {
           name: 'inpispostpaid',
           type: 'checkbox',
-          checked: tmpObj.ispostpaid, // ให้ค่าเริ่มต้นของ checkbox เป็นค่าปัจจุบันใน Firebase
+          checked: tmpObj.ispostpaid,
           placeholder: 'Is post paid',
         },
       ],
@@ -184,7 +184,6 @@ export class HomedbPage implements OnInit {
               telno: data.intelno,
             };
 
-            // ทำการอัปเดตข้อมูลใน Firebase
             this.dataService
               .updateData(editedData)
               .then(() => {

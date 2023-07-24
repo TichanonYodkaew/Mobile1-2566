@@ -11,7 +11,8 @@ export class AppComponent {
     { title: 'Contact', url: '/contact', icon: 'mail' },
     { title: 'Gallery', url: '/gallery', icon: 'images' },
     { title: 'Setting', url: '/setting', icon: 'settings' },
-    { title: 'HomeDB', url: '/homedb', icon: 'server' }
+    { title: 'HomeDB', url: '/homedb', icon: 'server' },
+    { title: 'Login', url: '/loginauth', icon: 'enter' }
   ];
   constructor() {}
 }

@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="danger">
+    <ion-title>Login Authentication</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item>
+      <ion-label>Email</ion-label>
+      <ion-input placeholder="Input your email here" [(ngModel)]="this.email2" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Password</ion-label>
+      <ion-input placeholder="Input your password here" type="password"  [(ngModel)]="this.pwd2" required>
+      </ion-input>
+    </ion-item>
+    
+    <ion-button type="submit" (click)="login()" expand="block" color="danger">
+      Login
+    </ion-button>
+    <ion-button type="submit" (click)="register()" expand="block" color="danger">
+      Register
+    </ion-button>
+  </ion-list>
+
+</ion-content>
