@@ -23,27 +23,7 @@ export class LoginauthPage implements OnInit {
     private router: Router
   ) { }
   
-  // credentials: FormGroup = this.fb.group({
-  //   email: ['', [Validators.required, Validators.email]],
-  //   password: ['', [Validators.required, Validators.minLength(6)]],
-  // });
-  
-
-  // Easy access for form fields
-  // get email() {
-  //   return this.credentials.get('email');
-  // }
-
-  // get password() {
-  //   return this.credentials.get('password');
-  // }
-
-  ngOnInit() {
-    // this.credentials = this.fb.group({
-    //   email: ['', [Validators.required, Validators.email]],
-    //   password: ['', [Validators.required, Validators.minLength(6)]],
-    // });
-  }
+  ngOnInit() {}
 
   async register() {
     const loading = await this.loadingController.create();
@@ -67,10 +47,20 @@ export class LoginauthPage implements OnInit {
     await loading.dismiss();
 
     if (user) {
-      this.router.navigateByUrl('/homedb', { replaceUrl: true });
+      this.showAlert('Login Success', 'You welcome!');
     } else {
       this.showAlert('Login failed', 'Please try again!');
     }
+  }
+
+  async logout(){
+    const loading = await this.loadingController.create();
+    await loading.present();
+
+    const user = await this.authService.logout();
+    await loading.dismiss();
+
+    return this.showAlert('Logout', this.email2 + 'has logout');
   }
 
   async showAlert(header: string, message: string) {
